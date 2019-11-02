@@ -12,12 +12,11 @@ const style = <T>(target: T, obj: IStyle): T => {
 
 style.css = (text: string, bem?: string) => {
   const ele = document.createElement('style');
-  ele.textContent = text;
-  ele.type = 'text/css';
-
   if (bem) {
     text = text.replace(/\.\^/g, `.${bem}-`);
   }
+  ele.type = 'text/css';
+  ele.textContent = text;
   document.head.appendChild(ele);
 };
 
