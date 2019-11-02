@@ -12,7 +12,7 @@ const style = <T>(target: T, obj: IStyle): T => {
 
 style.css = (text: string, bem?: string) => {
   const ele = document.createElement('style');
-  ele.innerText = text;
+  ele.textContent = text;
   ele.type = 'text/css';
 
   if (bem) {
