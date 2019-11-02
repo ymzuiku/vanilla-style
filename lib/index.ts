@@ -10,20 +10,20 @@ const style = <T>(target: T, obj: IStyle): T => {
   return target;
 };
 
-style.css = (text: string, BEM?: string) => {
+style.css = (text: string, bem?: string) => {
   const ele = document.createElement('style');
   ele.innerText = text;
   ele.type = 'text/css';
 
-  if (BEM) {
-    text = text.replace(/\.\^/g, `.${BEM}-`);
+  if (bem) {
+    text = text.replace(/\.\^/g, `.${bem}-`);
   }
   document.head.appendChild(ele);
 };
 
-style.class = <T>(target: T, className: string, BEM?: string): T => {
-  if (BEM) {
-    className = className.replace(/\^/g, `${BEM}-`);
+style.class = <T>(target: T, className: string, bem?: string): T => {
+  if (bem) {
+    className = className.replace(/\^/g, `${bem}-`);
   }
   (target as any).setAttribute('class', className);
 
@@ -31,5 +31,11 @@ style.class = <T>(target: T, className: string, BEM?: string): T => {
 };
 
 style.sheet = (obj: IStyle) => obj;
+
+style.bem = () => {
+  return `bem${Date.now().toString(32)}${Math.random()
+    .toString(32)
+    .slice(2)}`;
+};
 
 export default style;
