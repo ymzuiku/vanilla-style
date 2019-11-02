@@ -13,7 +13,7 @@ const style = <T>(target: T, obj: IStyle): T => {
 style.css = (text: string, bem?: string) => {
   const ele = document.createElement('style');
   if (bem) {
-    text = text.replace(/\.\^/g, `.${bem}-`);
+    text = text.replace(/(\-bem\-)/g, `.${bem}`);
   }
   ele.type = 'text/css';
   ele.textContent = text;
@@ -22,7 +22,7 @@ style.css = (text: string, bem?: string) => {
 
 style.class = <T>(target: T, className: string, bem?: string): T => {
   if (bem) {
-    className = className.replace(/\^/g, `${bem}-`);
+    className = className.replace(/(\-bem\-)/g, `${bem}`);
   }
   (target as any).setAttribute('class', className);
 
