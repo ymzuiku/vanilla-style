@@ -1,6 +1,6 @@
 # vanilla-style
 
-> Size < 1kb
+> Size 300b
 
 ## Install
 
@@ -15,13 +15,7 @@ import style from 'vanilla-style';
 
 const box = document.getElementById('box');
 
-style.css(`
-  :root {
-    --red: #f55;
-  }
-`);
-
 style(box, {
-  background: 'var(--red)',
+  background: '#f00',
 });
 ```
