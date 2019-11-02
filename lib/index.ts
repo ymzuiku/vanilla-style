@@ -8,12 +8,12 @@ const style = (target: any, obj: IStyle) => {
   });
 };
 
-const css = (text: string) => {
+style.css = (text: string) => {
   const ele = document.createElement('style');
   ele.innerText = text;
   document.head.append(ele);
 };
 
-style.css = css;
+style.sheet = (obj: IStyle) => obj;
 
 export default style;
