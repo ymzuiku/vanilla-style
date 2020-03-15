@@ -1,5 +1,7 @@
 # vanilla-style
 
+Functional modal css-in-js.
+
 Easy set HTMLElement styles, and easy use css-in-js make like pretend class: hover, active:
 
 > Size 300b
