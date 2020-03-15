@@ -1,5 +1,7 @@
 # vanilla-style
 
+Easy set HTMLElement styles, and easy use css-in-js make like pretend class: hover, active:
+
 > Size 300b
 
 ## Install
@@ -15,7 +17,19 @@ import style from 'vanilla-style';
 
 const box = document.getElementById('box');
 
-style(box, {
-  background: '#f00',
+const styleSheet = style({
+  // base style
+  color:'#333',
+  background: '#f55',
+  // like css :active
+  active: {
+    background: '#ff0',
+  },
+  // like css :hover
+  hover: {
+    background: '#55f'
+  }
 });
+
+styleSheet(box);
 ```

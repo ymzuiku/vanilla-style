@@ -50,6 +50,8 @@ interface IDisplay {
     inherit: string;
 }
 export interface IStyle {
+    hover?: IStyle;
+    active?: IStyle;
     alignContent?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'space-between' | 'space-around' | keyof IGlobalValues;
     alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline' | keyof IGlobalValues;
     alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline' | keyof IGlobalValues;

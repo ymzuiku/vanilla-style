@@ -53,6 +53,8 @@ interface IDisplay {
 }
 
 export interface IStyle {
+  hover?:IStyle,
+  active?:IStyle,
   alignContent?:
     | 'flex-start'
     | 'flex-end'
