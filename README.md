@@ -15,8 +15,6 @@ $ npm install --save vanilla-style
 ```js
 import style from 'vanilla-style';
 
-const box = document.getElementById('box');
-
 const styleSheet = style({
   // base style
   color:'#333',
@@ -30,6 +28,8 @@ const styleSheet = style({
     background: '#55f'
   }
 });
+
+const box = document.getElementById('box');
 
 styleSheet(box);
 ```
