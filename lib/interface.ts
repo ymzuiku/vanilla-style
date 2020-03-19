@@ -52,9 +52,29 @@ interface IDisplay {
   inherit: string;
 }
 
-export interface IStyle {
-  hover?:IStyle,
-  active?:IStyle,
+export type IFlexLayout = "row center center"
+| "row start start"
+| "row end end"
+| "row start center"
+| "row start end"
+| "row end center"
+| "row end start"
+| "col center center"
+| "col start start"
+| "col end end"
+| "col start center"
+| "col start end"
+| "col end center"
+| "col end start";
+
+export interface IPowerStyle {
+  $hover?:IStyle;
+  $active?:IStyle;
+  $flex?: IFlexLayout;
+  $media?: [number, IStyle];
+}
+
+export interface IStyle extends IPowerStyle {
   alignContent?:
     | 'flex-start'
     | 'flex-end'

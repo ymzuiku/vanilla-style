@@ -1,9 +1,9 @@
-import { IProps, IStyle } from "./interface";
-export { IProps, IStyle };
-declare const style: {
-    <T>(obj: IStyle): (target: T) => T;
-    sheet(obj: IStyle): IStyle;
-    hover<T>(obj: IStyle): (ele: T) => T;
-    active<T>(obj: IStyle): (ele: T) => T;
-};
+import style from './style';
+import './useActive';
+import './useFlex';
+import './useHover';
+import './useMedia';
+import './useMobile';
+import './usePc';
+export { IStyle, IProps } from './interface';
 export default style;
