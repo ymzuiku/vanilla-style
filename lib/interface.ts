@@ -72,6 +72,8 @@ export interface IPowerStyle {
   $active?:IStyle;
   $flex?: IFlexLayout;
   $media?: [number, IStyle];
+  $pc?:IStyle;
+  $mobile?:IStyle;
 }
 
 export interface IStyle extends IPowerStyle {
