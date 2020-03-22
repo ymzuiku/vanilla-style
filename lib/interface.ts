@@ -60,6 +60,8 @@ interface IDisplay {
 }
 
 export type IFlexLayout = "row center center"
+| "row center start"
+| "row center end"
 | "row start start"
 | "row end end"
 | "row start center"
@@ -73,6 +75,8 @@ export type IFlexLayout = "row center center"
 | "row around center"
 | "row around end"
 | "col center center"
+| "col center start"
+| "col center end"
 | "col start start"
 | "col end end"
 | "col start center"
