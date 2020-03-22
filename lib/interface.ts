@@ -59,13 +59,26 @@ export type IFlexLayout = "row center center"
 | "row start end"
 | "row end center"
 | "row end start"
+| "row between start"
+| "row between center"
+| "row between end"
+| "row around start"
+| "row around center"
+| "row around end"
 | "col center center"
 | "col start start"
 | "col end end"
 | "col start center"
 | "col start end"
 | "col end center"
-| "col end start";
+| "col end start"
+| "col between start"
+| "col between center"
+| "col between end"
+| "col around start"
+| "col around center"
+| "col around end"
+;
 
 export interface IPowerStyle {
   $hover?:IStyle;

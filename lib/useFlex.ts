@@ -7,10 +7,10 @@ const parserFlexLayoutData = (str: IFlexLayout) => {
   if (fd === "col") {
     fd = "column";
   }
-  if (jc !== "center") {
+  if (jc === "start" || jc === 'end') {
     jc = "flex-" + jc;
   }
-  if (ai !== "center") {
+  if (ai === "start" || jc === 'end') {
     ai = "flex-" + ai;
   }
   return {
