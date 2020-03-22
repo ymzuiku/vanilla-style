@@ -1,5 +1,5 @@
 import { IStyle } from "./interface";
-declare type IStyleFn = <T>(obj: IStyle) => (target: T) => T;
+declare type IStyleFn = <T>(obj: IStyle) => (...args: T[]) => T | T[];
 interface IStyleParams {
     middlewares: {
         [key: string]: <T>(value: any) => (ele: T) => T;

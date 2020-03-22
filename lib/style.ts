@@ -2,30 +2,41 @@ import { IStyle } from "./interface";
 
 const agents = ["android", "iphone", "windows phone", "ipad", "ipod"];
 
-type IStyleFn = <T>(obj: IStyle) => (target: T) => T;
+type IStyleFn = <T>(obj: IStyle) => (...args:T[]) => T | T[];
 interface IStyleParams {
   middlewares: { [key: string]: <T>(value: any) => (ele: T) => T };
   isPc: boolean;
   use: (key: string, fn: <T>(value: any) => (ele: T) => T) => void;
   setStyle: <T>(obj: IStyle) => (ele: T) => T;
-  createOutEnterStyle: <T>(obj: IStyle, isKeep?:boolean) => [Function, Function];
+  createOutEnterStyle: <T>(
+    obj: IStyle,
+    isKeep?: boolean
+  ) => [Function, Function];
   sheet: (obj: IStyle) => IStyle;
   [key: string]: any;
 }
 
 const style: IStyleFn & IStyleParams = <T>(obj: IStyle) => {
-  return (target: T): T => {
-    Object.keys(obj).forEach(k => {
-      const v = obj[k];
-      const fn = style.middlewares[k];
-      if (fn) {
-        fn(v)(target);
-      } else {
-        (target as any).style[k] = v;
-      }
+  return (...args:T[]): T | T[] => {
+    function doTarget(ele: any) {
+      Object.keys(obj).forEach(k => {
+        const v = obj[k];
+        const fn = style.middlewares[k];
+        if (fn) {
+          fn(v)(ele);
+        } else {
+          ele.style[k] = v;
+        }
+      });
+    }
+    args.forEach((t: any) => {
+      doTarget(t);
     });
 
-    return target;
+    if (args.length === 1) {
+      return args[0]
+    }
+    return args;
   };
 };
 
@@ -41,7 +52,7 @@ style.setStyle = <T>(obj: IStyle) => {
   };
 };
 
-style.createOutEnterStyle = (obj: IStyle, isKeep?:boolean) => {
+style.createOutEnterStyle = (obj: IStyle, isKeep?: boolean) => {
   let lastStyle = null as any;
   function enter(ele: any) {
     if (!lastStyle) {
