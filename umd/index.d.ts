@@ -5,5 +5,6 @@ import './useHover';
 import './useMedia';
 import './useMobile';
 import './usePc';
+import './useScrollBlock';
 export { IStyle, IProps } from './interface';
 export default style;

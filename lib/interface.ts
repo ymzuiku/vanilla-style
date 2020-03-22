@@ -14,6 +14,13 @@ interface IPosition {
   '-webkit-sticky': string;
 }
 
+export interface IScrollBlockEvent {
+  space: number;
+  onScrollIn: Function;
+  onScrollOut: Function;
+  key?: string;
+}
+
 interface IDisplay {
   /**此元素不会被显示。 */
   none: string;
@@ -87,6 +94,7 @@ export interface IPowerStyle {
   $media?: [number, IStyle];
   $pc?:IStyle;
   $mobile?:IStyle;
+  $scrollBlock?:IScrollBlockEvent;
 }
 
 export interface IStyle extends IPowerStyle {
