@@ -6,7 +6,7 @@ style.use("$hover", <T>(obj: IStyle) => {
   const [enter, out] = style.makeOutEnterStyle(obj);
 
   return (ele: T): T => {
-    if (!style.isPc) {
+    if (!style.isPc || !ele) {
       return ele;
     }
     (ele as any).addEventListener("mouseenter", () => enter(ele));
