@@ -1,6 +1,6 @@
 {
   "name": "vanilla-style",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "umd/index.js",
   "types": "umd/index.d.ts",
   "private": false,

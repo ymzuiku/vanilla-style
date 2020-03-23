@@ -102,6 +102,7 @@ export interface IPowerStyle {
 }
 
 export interface IStyle extends IPowerStyle {
+
   alignContent?:
     | 'flex-start'
     | 'flex-end'
@@ -667,6 +668,7 @@ export interface IStyle extends IPowerStyle {
   webkitUserModify?: string | null;
   webkitUserSelect?: string | null;
   webkitWritingMode?: string | null;
+  webkitOverflowScrolling?: 'auto'|'touch';
   whiteSpace?: string;
   widows?: string | null;
   width?: string | null;
