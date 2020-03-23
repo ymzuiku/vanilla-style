@@ -10,11 +10,6 @@ interface IStyleParams {
   setStyle: <T>(obj: IStyle) => (ele: T) => T;
   makeOutEnterStyle: <T>(obj: IStyle) => [Function, Function];
   createBaseStyle: (obj: IStyle) => IStyle;
-  createSheet: (obj: {
-    [key: string]: IStyle;
-  }) => {
-    [key: string]: (...args: HTMLElement[]) => HTMLElement | HTMLElement[];
-  };
   [key: string]: any;
 }
 
@@ -44,13 +39,6 @@ const style: IStyleFn & IStyleParams = <T>(obj: IStyle) => {
 
 style.middlewares = {};
 style.createBaseStyle = (obj: IStyle) => obj;
-style.createSheet = obj => {
-  const sheet = {} as any;
-  Object.keys(obj).forEach(key => {
-    sheet[key] = style(obj[key]);
-  });
-  return sheet;
-};
 
 style.setStyle = <T>(obj: IStyle) => {
   return (ele: T) => {
