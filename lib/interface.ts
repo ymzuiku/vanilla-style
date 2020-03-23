@@ -95,7 +95,12 @@ export interface IPowerStyle {
   $hover?:IStyle;
   $active?:IStyle;
   $flex?: IFlexLayout;
-  $media?: [number, IStyle];
+  /**
+   * set $mediaApplyWidth or $mediaApplyHeight apply style
+   */
+  $media?: IStyle;
+  $mediaApplyWidth?:number;
+  $mediaApplyHeight?:number;
   $pc?:IStyle;
   $mobile?:IStyle;
   $scrollBlock?:IScrollBlockEvent;
