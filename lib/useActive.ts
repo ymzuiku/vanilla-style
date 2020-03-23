@@ -3,7 +3,7 @@ import style from "./style";
 import { IStyle } from "./interface";
 
 style.use("$active", <T>(obj: IStyle) => {
-  const [enter, out] = style.createOutEnterStyle(obj);
+  const [enter, out] = style.makeOutEnterStyle(obj);
 
   return (ele: T): T => {
     if (style.isPc) {

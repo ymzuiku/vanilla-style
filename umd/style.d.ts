@@ -7,8 +7,13 @@ interface IStyleParams {
     isPc: boolean;
     use: (key: string, fn: <T>(value: any) => (ele: T) => T) => void;
     setStyle: <T>(obj: IStyle) => (ele: T) => T;
-    createOutEnterStyle: <T>(obj: IStyle, isKeep?: boolean) => [Function, Function];
-    sheet: (obj: IStyle) => IStyle;
+    makeOutEnterStyle: <T>(obj: IStyle) => [Function, Function];
+    createBaseStyle: (obj: IStyle) => IStyle;
+    createSheet: (obj: {
+        [key: string]: IStyle;
+    }) => {
+        [key: string]: (...args: HTMLElement[]) => HTMLElement | HTMLElement[];
+    };
     [key: string]: any;
 }
 declare const style: IStyleFn & IStyleParams;

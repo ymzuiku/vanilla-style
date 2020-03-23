@@ -2,22 +2,24 @@ import { IStyle } from "./interface";
 
 const agents = ["android", "iphone", "windows phone", "ipad", "ipod"];
 
-type IStyleFn = <T>(obj: IStyle) => (...args:T[]) => T | T[];
+type IStyleFn = <T>(obj: IStyle) => (...args: T[]) => T | T[];
 interface IStyleParams {
   middlewares: { [key: string]: <T>(value: any) => (ele: T) => T };
   isPc: boolean;
   use: (key: string, fn: <T>(value: any) => (ele: T) => T) => void;
   setStyle: <T>(obj: IStyle) => (ele: T) => T;
-  createOutEnterStyle: <T>(
-    obj: IStyle,
-    isKeep?: boolean
-  ) => [Function, Function];
-  sheet: (obj: IStyle) => IStyle;
+  makeOutEnterStyle: <T>(obj: IStyle) => [Function, Function];
+  createBaseStyle: (obj: IStyle) => IStyle;
+  createSheet: (obj: {
+    [key: string]: IStyle;
+  }) => {
+    [key: string]: (...args: HTMLElement[]) => HTMLElement | HTMLElement[];
+  };
   [key: string]: any;
 }
 
 const style: IStyleFn & IStyleParams = <T>(obj: IStyle) => {
-  return (...args:T[]): T | T[] => {
+  return (...args: T[]): T | T[] => {
     function doTarget(ele: any) {
       Object.keys(obj).forEach(k => {
         const v = obj[k];
@@ -34,14 +36,21 @@ const style: IStyleFn & IStyleParams = <T>(obj: IStyle) => {
     });
 
     if (args.length === 1) {
-      return args[0]
+      return args[0];
     }
     return args;
   };
 };
 
 style.middlewares = {};
-style.sheet = (obj: IStyle) => obj;
+style.createBaseStyle = (obj: IStyle) => obj;
+style.createSheet = obj => {
+  const sheet = {} as any;
+  Object.keys(obj).forEach(key => {
+    sheet[key] = style(obj[key]);
+  });
+  return sheet;
+};
 
 style.setStyle = <T>(obj: IStyle) => {
   return (ele: T) => {
@@ -52,7 +61,7 @@ style.setStyle = <T>(obj: IStyle) => {
   };
 };
 
-style.createOutEnterStyle = (obj: IStyle, isKeep?: boolean) => {
+style.makeOutEnterStyle = (obj: IStyle) => {
   let lastStyle = null as any;
   function enter(ele: any) {
     if (!lastStyle) {
@@ -60,9 +69,7 @@ style.createOutEnterStyle = (obj: IStyle, isKeep?: boolean) => {
     }
 
     Object.keys(obj).forEach(k => {
-      if (!isKeep) {
-        lastStyle[k] = (ele as any).style[k];
-      }
+      lastStyle[k] = (ele as any).style[k];
       (ele as any).style[k] = obj[k];
     });
   }
@@ -72,9 +79,7 @@ style.createOutEnterStyle = (obj: IStyle, isKeep?: boolean) => {
         (ele as any).style[k] = lastStyle[k];
       });
     }
-    if (!isKeep) {
-      lastStyle = null;
-    }
+    lastStyle = null;
   }
   return [enter, out];
 };

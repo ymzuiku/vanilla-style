@@ -17,7 +17,10 @@ $ npm install --save vanilla-style
 ```js
 import style from "vanilla-style";
 
-const styleSheet = style({
+
+const box = document.getElementById("box");
+
+style({
   // base style
   color: "#333",
   background: "#f55",
@@ -30,11 +33,29 @@ const styleSheet = style({
   },
   // like display:flex; flex-direction: row; justify-content:center; align-items:center;
   $flex: "row center start"
-});
+})(box);
+```
 
-const box = document.getElementById("box");
+## Use sheet
 
-styleSheet(box);
+Sheet is some style Functions:
+
+```ts
+const sheet = style.createSheet({
+  header:{
+    background:'#333'
+  },
+  title: {
+    color:'#00f'
+  }
+})
+
+const header = document.getElementById("header");
+const title = document.getElementById("title");
+
+sheet.header(header);
+sheet.title(title);
+
 ```
 
 ## Middleware
