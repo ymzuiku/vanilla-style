@@ -23,9 +23,7 @@ const parserFlexLayoutData = (str: IFlexLayout) => {
 
 const flexLayoutData = {} as any;
 
-style.use("$flex", <T>(key: IFlexLayout) => {
-  style.middlewaresApplyAgain['$flex'] = 1;
-  
+style.use("$flex", <T>(key: IFlexLayout) => {  
   return (ele: T): T => {
     if (!flexLayoutData[key]) {
       flexLayoutData[key] = parserFlexLayoutData(key);
