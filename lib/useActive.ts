@@ -3,6 +3,8 @@ import style from "./style";
 import { IStyle } from "./interface";
 
 style.use("$active", <T>(obj: IStyle) => {
+  style.middlewaresApplyAgain['$active'] = 1;
+
   const [enter, out] = style.makeOutEnterStyle(obj);
 
   return (ele: T): T => {

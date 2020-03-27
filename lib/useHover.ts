@@ -3,6 +3,8 @@ import style from "./style";
 import { IStyle } from "./interface";
 
 style.use("$hover", <T>(obj: IStyle) => {
+  style.middlewaresApplyAgain['$hover'] = 1;
+
   const [enter, out] = style.makeOutEnterStyle(obj);
 
   return (ele: T): T => {

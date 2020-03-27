@@ -5,6 +5,7 @@ const agents = ["android", "iphone", "windows phone", "ipad", "ipod"];
 type IStyleFn = <T>(obj: IStyle) => (...args: T[]) => T | T[];
 interface IStyleParams {
   middlewares: { [key: string]: <T>(value: any) => (ele: T) => T };
+  middlewaresApplyAgain: { [key: string]: any };
   isPc: boolean;
   use: (key: string, fn: <T>(value: any) => (ele: T) => T) => void;
   setStyle: <T>(obj: IStyle) => (ele: T) => T;
@@ -39,11 +40,19 @@ const style: IStyleFn & IStyleParams = <T>(obj: IStyle) => {
 
 style.middlewares = {};
 style.createBaseStyle = (obj: IStyle) => obj;
+// 用于记录 middlewares 中可以重复支持的 middleware
+style.middlewaresApplyAgain = {} as any;
 
 style.setStyle = <T>(obj: IStyle) => {
   return (ele: T) => {
     Object.keys(obj).forEach(k => {
-      (ele as any).style[k] = obj[k];
+      // middleware中支持的middleware
+      if (style.middlewaresApplyAgain[k] && style.middlewares[k]) {
+        const fn = style.middlewares[k];
+        fn(obj)(ele);
+      } else {
+        (ele as any).style[k] = obj[k];
+      }
     });
     return ele;
   };
